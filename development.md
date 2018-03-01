@@ -1,6 +1,6 @@
 ### Kmers as an assembly metric
 
-Basically, can we learn something about reads, by quantitating the number of matches to a refseq database?
+Basically, can we learn something about reads (and their "assembly potential"), by quantitating the number of matches to a refseq database?
 
 Here are the putative steps.
 
@@ -11,6 +11,14 @@ Here are the putative steps.
 3. Query the overlap. As the read set improves, the degree of overlap increases. This degree should plateau at some specific sequencing depth.
 
 4. At the "right" kmer length (which should be long), there should be close to 0 kmers found in the invert RefSeq database
+
+#### RefSeq downloaded 28Feb18
+
+```
+#3,968,793,686 unique 31mers in refseq mammal
+#4,384,045,340 unique 41mers in refseq mammal
+```
+
 
 ```
 #!/bin/bash
