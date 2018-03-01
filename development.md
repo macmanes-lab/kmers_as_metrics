@@ -17,6 +17,9 @@ Here are the putative steps.
 ```
 #3,968,793,686 unique 31mers in refseq mammal
 #4,384,045,340 unique 41mers in refseq mammal
+
+#4,406,519,592 unique 31mers in refseq invert
+
 ```
 
 
@@ -38,6 +41,10 @@ seqtk sample -s23 SRR2086412.TRIM_1P.cor.fq "$SUBSAMP" > "$SAMP"_"$TAXA"_"$READS
 for kmer in `seq 31 10 41`; do
         jellyfish count -m "$kmer" -s 100M -t 24 -o /dev/stdout -C "$DATABASE" | jellyfish dump /dev/stdin > "$kmer"mers_in_"$TAXA"_refseq.fasta;
         jellyfish count -m "$kmer" -s 100M -t 24 -o k"$kmer"_"$SAMP"reads.jf -C "$SAMP"_"$TAXA"_"$READS";
-        jellyfish query k"$kmer"_"$SAMP"reads.jf -s "$kmer"mers_in_"$TAXA"_refseq.fasta | awk '$2 > 0' | tee -a k"$kmer"_"$SAMP"_matches.list;
+        jellyfish query k"$kmer"_"$SAMP"reads.jf -s "$kmer"mers_in_"$TAXA"_refseq.fasta | awk '$2 > 0' | tee -a k"$kmer"_"$SAMP"_matches_in_"$TAXA".list;
 done
 ```
+
+In 10K reads from `SRR2086412.TRIM_1P.cor.fq`, there are `338184` 31mer matches to 31mer very database (338184/3968793686 = 8.521078e-05 )
+
+In 10K reads from `SRR2086412.TRIM_1P.cor.fq`, there are `294657` 41mer matches to 41mer very database (294657/4384045340 = 6.721121e-05 )
